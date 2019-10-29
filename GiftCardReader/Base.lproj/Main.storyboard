@@ -1,37 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="GiftCardReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </arscnView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DnE-Qu-hh5">
+                                <rect key="frame" x="87" y="44" width="240" height="66"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Nom-KG-OIQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="66"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000 0000 0000 0000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5qn-uE-gwD">
+                                            <rect key="frame" x="6" y="6" width="228" height="54"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5qn-uE-gwD" firstAttribute="centerX" secondItem="Nom-KG-OIQ" secondAttribute="centerX" id="Gr9-qn-b1M"/>
+                                        <constraint firstItem="5qn-uE-gwD" firstAttribute="top" secondItem="Nom-KG-OIQ" secondAttribute="top" constant="6" id="Hlg-in-GIL"/>
+                                        <constraint firstItem="5qn-uE-gwD" firstAttribute="leading" secondItem="Nom-KG-OIQ" secondAttribute="leading" constant="6" id="Kfm-z6-t7e"/>
+                                        <constraint firstAttribute="bottom" secondItem="5qn-uE-gwD" secondAttribute="bottom" constant="6" id="P7b-Lg-Qy2"/>
+                                        <constraint firstItem="5qn-uE-gwD" firstAttribute="centerY" secondItem="Nom-KG-OIQ" secondAttribute="centerY" id="bdV-VC-DeS"/>
+                                        <constraint firstAttribute="trailing" secondItem="5qn-uE-gwD" secondAttribute="trailing" priority="999" constant="6" id="h0N-eQ-Cvp"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="JgV-kF-nA0"/>
+                                    <constraint firstAttribute="width" constant="240" id="rya-fB-xj8"/>
+                                </constraints>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTW-4E-jG9">
+                                <rect key="frame" x="350" y="55" width="44" height="44"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TvC-vk-gTT">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFC-C6-6V0">
+                                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="D9L-52-P22"/>
+                                                <constraint firstAttribute="width" constant="44" id="ox6-Cm-jNz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <state key="normal" image="arrow.clockwise" catalog="system"/>
+                                            <connections>
+                                                <action selector="refresh:" destination="BV1-FR-VrT" eventType="touchUpInside" id="2Cy-Wq-TYh"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="wFC-C6-6V0" firstAttribute="centerX" secondItem="TvC-vk-gTT" secondAttribute="centerX" id="QYP-1Q-FNl"/>
+                                        <constraint firstItem="wFC-C6-6V0" firstAttribute="centerY" secondItem="TvC-vk-gTT" secondAttribute="centerY" id="cgv-oo-aoc"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="G75-jw-M6U"/>
+                                    <constraint firstAttribute="height" constant="44" id="QE8-ou-DFS"/>
+                                </constraints>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
+                            <constraint firstItem="DnE-Qu-hh5" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="LJh-CW-eGn"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="U0K-SW-4ec" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
+                            <constraint firstItem="DnE-Qu-hh5" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="ia6-ih-6Um"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
+                            <constraint firstAttribute="trailing" secondItem="mTW-4E-jG9" secondAttribute="trailing" constant="20" id="we3-XQ-gK4"/>
+                            <constraint firstItem="mTW-4E-jG9" firstAttribute="centerY" secondItem="DnE-Qu-hh5" secondAttribute="centerY" id="zhJ-eU-eg2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
+                        <outlet property="buttonVisualEffectView" destination="mTW-4E-jG9" id="3UN-uh-W3g"/>
+                        <outlet property="labelVisualEffectView" destination="DnE-Qu-hh5" id="szJ-WD-PwZ"/>
+                        <outlet property="numberLabel" destination="5qn-uE-gwD" id="HrM-8C-R6n"/>
+                        <outlet property="refreshButton" destination="wFC-C6-6V0" id="Odj-Y0-3q7"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="118.52678571428571"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
+    </resources>
 </document>
