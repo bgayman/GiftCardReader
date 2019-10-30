@@ -41,34 +41,18 @@ extension String {
             return nil
         }
         
-        // Potential number found. Strip out punctuation, whitespace and country
-        // prefix.
-        var phoneNumberDigits = ""
-        let substring = String(self[range])
-        let nsrange = NSRange(substring.startIndex..., in: substring)
-        do {
-            // Extract the characters from the substring.
-            let regex = try NSRegularExpression(pattern: pattern, options: [])
-            if let match = regex.firstMatch(in: substring, options: [], range: nsrange) {
-                for rangeInd in 1 ..< match.numberOfRanges {
-                    let range = match.range(at: rangeInd)
-                    let matchString = (substring as NSString).substring(with: range)
-                    phoneNumberDigits += matchString as String
-                }
-            }
-        } catch {
-            print("Error \(error) when creating pattern")
-        }
+        // Potential number found.
+        let giftCardDigits = String(self[range])
         
         // Must be exactly 10 digits.
-        guard phoneNumberDigits.count == 16 else {
+        guard giftCardDigits.count == 19 else {
             return nil
         }
         
         // Substitute commonly misrecognized characters, for example: 'S' -> '5' or 'l' -> '1'
         var result = ""
-        let allowedChars = "0123456789"
-        for var char in phoneNumberDigits {
+        let allowedChars = "0123456789 "
+        for var char in giftCardDigits {
             char = char.getSimilarCharacterIfNotIn(allowedChars: allowedChars)
             guard allowedChars.contains(char) else {
                 return nil

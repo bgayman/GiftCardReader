@@ -43,6 +43,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var buttonVisualEffectView: UIVisualEffectView!
     @IBOutlet weak var refreshButton: UIButton!
     var backNode: SCNNode?
+    var giftcardNumber: String?
     
     
     override func viewDidLoad() {
@@ -179,21 +180,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    private func addNumberNode(at point: CGPoint, number: String) {
-        guard let hit = sceneView.hitTest(point, options: nil).first else {
-            print("NOTHING HIT")
+    private func addNumberNode(number: String) {
+        guard let numberNode = sceneView.scene.rootNode.childNode(withName: "number", recursively: true) else {
+            print("NO NODE")
             return
         }
-        let node = hit.node
-        let coordinates = hit.localCoordinates
-        let geo = SCNText(string: number, extrusionDepth: 0.005)
-        geo.font = UIFont.systemFont(ofSize: 12.0)
+        numberNode.geometry = makeNumberGeometry(with: number)
+    }
+    
+    private func makeNumberGeometry(with number: String) -> SCNText {
+        let geo = SCNText(string: number, extrusionDepth: 0.1)
+        geo.font = UIFont(name: "Helvetica", size: 9)
         geo.firstMaterial?.diffuse.contents = UIColor.black
-        let childNode = SCNNode()
-        childNode.name = "number"
-        childNode.position = coordinates
-        childNode.geometry = geo
-        node.addChildNode(childNode)
+        geo.flatness = 0.1
+        geo.chamferRadius = 0.5
+        return geo
     }
     
     // MARK: - ARSCNViewDelegate -
@@ -203,14 +204,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         guard let imageAnchor = anchor as? ARImageAnchor, imageAnchor.name == "back" else {
             return nil
         }
+        let scene = SCNScene(named: "art.scnassets/card.scn")!
         let node = SCNNode()
-        let childNode = SCNNode()
-        let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
-        childNode.geometry = plane
-        childNode.geometry?.firstMaterial?.transparency = 1.0
-        childNode.eulerAngles.x = -Float.pi * 0.5
-        node.addChildNode(childNode)
-        backNode = node
+        if let cardNode = scene.rootNode.childNode(withName: "card", recursively: true) {
+            cardNode.eulerAngles.x = -Float.pi * 0.5
+            cardNode.geometry?.firstMaterial?.transparency = 0.0
+            node.addChildNode(cardNode)
+            if let giftcardNumber = self.giftcardNumber, let numberNode = cardNode.childNode(withName: "number", recursively: true) {
+                numberNode.geometry = makeNumberGeometry(with: giftcardNumber)
+            }
+        }
         return node
     }
 
@@ -317,23 +320,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Check if we have any temporally stable numbers.
         if let sureNumber = numberTracker.getStableString() {
 //            showString(string: sureNumber)
-            if backNode != nil {
-                DispatchQueue.main.async {
-                    self.numberLabel.text = sureNumber
-                    self.animateVisualEffectViews(on: true)
-                    if let box = greenBoxes.first {
-                        let point = self.convertFromCamera(CGPoint(x: box.midX, y: box.midY), view: self.sceneView)
-                        self.addNumberNode(at: point, number: sureNumber)
-                    } else {
-                        print("NO GREEN BOX")
-                    }
-                }
-                
-                numberTracker.reset(string: sureNumber)
-                shouldFindGiftCardNumber = false
-            } else {
-                numberTracker.reset(string: sureNumber)
+            DispatchQueue.main.async {
+                self.giftcardNumber = sureNumber
+                self.numberLabel.text = sureNumber
+                self.animateVisualEffectViews(on: true)
+                self.addNumberNode(number: sureNumber)
             }
+            
+            numberTracker.reset(string: sureNumber)
+            shouldFindGiftCardNumber = false
         }
     }
     
